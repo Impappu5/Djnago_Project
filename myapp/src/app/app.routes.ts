@@ -9,6 +9,7 @@ import { Login } from './main_component/login/login';
 import { Sidebar } from './shared_component/sidebar/sidebar';
 import { Layout } from './main_component/layout/layout';
 import { Main } from './main_component/main/main';
+import { Profile } from './main_component/profile/profile';
 
 export const routes: Routes = [
     { path: '', component: Home, title: 'Layout Page' },
@@ -27,6 +28,8 @@ export const routes: Routes = [
     { path: 'signup', component: Signup, title: 'Signup Page' },
     { path: 'contact', component: Contact, title: 'Contact Page' },
     { path: 'about', component: About, title: 'About Page' },
+     { path: 'profile', component: Profile },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 
     //    {path:'forgotPassword',component:ForgotPassword,title:'Password Reset Page'}
 

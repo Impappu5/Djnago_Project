@@ -16,21 +16,13 @@
             <div class="input-group d-flex align-items-center">
               <span class="bi bi-person-fill"></span>
               <input
-                type="email"
+                type="text"
                  formControlName="email"
                 id="email"              
                 placeholder="Email"
                 class="form-control rounded-start-2 shadow-none"
               />
-              @if (
-                form.controls['email']?.errors?.['required'] &&
-                form.controls['email'].touched
-              ) {
-                <span>email is required</span>
-              }
-              @if (form.controls['email'].errors?.['email']) {
-                <span>Please, enter valid email</span>
-              }
+              
             </div>
             <br />
             <div class="input-group d-flex align-items-center">
@@ -52,7 +44,7 @@
             </div>
             <br /><br />
 
-            <button class="btn btn-primary fw-bold w-100" type="submit " [disabled]="!form.valid">
+            <button class="btn btn-primary fw-bold w-100" type="submit ">
               LOGIN
             </button>
 
