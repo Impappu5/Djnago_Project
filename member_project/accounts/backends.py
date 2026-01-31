@@ -6,8 +6,8 @@ User = get_user_model()
 
 class EmailAuthBackend(ModelBackend):
     def authenticate(self, request, email=None, password=None, **kwargs):
-        print("🔥 EmailAuthBackend CALLED", email)
-        print("🔥 EmailAuthBackend CALLED", password)
+        # print("🔥 EmailAuthBackend CALLED", email)
+        # print("🔥 EmailAuthBackend CALLED", password)
 
         try:
             user = User.objects.get(email=email)
