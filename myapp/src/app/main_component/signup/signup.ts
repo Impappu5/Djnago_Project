@@ -10,6 +10,8 @@ import { UserRegister } from '../../../servicess/user-register';
 
 
 
+
+
 @Component({
   selector: 'app-signup',
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
@@ -17,6 +19,7 @@ import { UserRegister } from '../../../servicess/user-register';
   styleUrl: './signup.css',
 })
 export class Signup {
+  
 
   registerForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -25,20 +28,38 @@ export class Signup {
     confirmPassword: new FormControl('', [Validators.required])
 
   })
+ 
 
   constructor(private toastr: ToastrService, private authService: AuthService, private userRegister: UserRegister) {
 
   }
+
   // ngOnInit() {
   //   this.getMemberList();
   // }
 
 
   onSignup() {
+ if (this.registerForm.invalid) {
+    this.toastr.error('Please fill the form correctly');
+    return;
+  }
+
+  const password = this.registerForm.get('password')?.value;
+  const confirm = this.registerForm.get('confirmPassword')?.value;
+
+  if (password !== confirm) {
+    this.toastr.error('Passwords do not match');
+    return;
+  }
 
     this.authService.register(this.registerForm.value).subscribe({
-      next: () => alert('Registration successful'),
-      error: err => alert(err.error)
+      next: () =>{
+        this.toastr.success('Registration successful');
+         this.registerForm.reset()
+
+      } ,
+      error: err => this.toastr.error(err.error)
     });
   }
 

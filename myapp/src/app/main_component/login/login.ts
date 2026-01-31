@@ -33,9 +33,13 @@ export class Login {
     this.authService.login(this.form.value).subscribe({
       next: (res: any) => {
         this.authService.saveTokens(res.access, res.refresh);
+        this.toastr.success('Login successful'); // success toast
         this.router.navigate(['/profile']);
       },
-      error: () => alert('Invalid credentials')
+      error: (err) => {
+      console.log(err);
+      this.toastr.error('Do not match email/password'); // error toast for wrong email/password
+    }
     });
   }
   credentials(credentials: any) {
