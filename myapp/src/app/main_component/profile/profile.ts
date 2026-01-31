@@ -16,10 +16,10 @@ export class Profile implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.profile().subscribe({
-      next: data => this.user = data,
-      error: () => this.router.navigate(['/login'])
-    });
+    // this.authService.profile().subscribe({
+    //   next: data => this.user = data,
+    //   error: () => this.router.navigate(['/login'])
+    // });
   }
 
   logout() {

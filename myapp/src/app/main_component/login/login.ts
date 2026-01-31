@@ -33,7 +33,7 @@ export class Login {
     this.authService.login(this.form.value).subscribe({
       next: (res: any) => {
         this.authService.saveTokens(res.access, res.refresh);
-        // this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']);
       },
       error: () => alert('Invalid credentials')
     });
