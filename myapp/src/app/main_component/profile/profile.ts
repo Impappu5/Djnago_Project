@@ -2,26 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { UserRegister } from '../../../servicess/user-register';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../servicess/auth-service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [AsyncPipe, NgIf],
+
   templateUrl: './profile.html',
   styleUrl: './profile.css',
+
 })
-export class Profile implements OnInit {
+export class Profile {
 
-   user: any;
+  user$!: Observable<any>;
+  constructor(private authService: AuthService, private router: Router, private http: HttpClient) {
 
-  constructor(private authService: AuthService, private router: Router) {}
-
-  ngOnInit() {
-    // this.authService.profile().subscribe({
-    //   next: data => this.user = data,
-    //   error: () => this.router.navigate(['/login'])
-    // });
   }
 
+  ngOnInit() {
+    this.user$ = this.authService.getProfile();
+  }
   logout() {
     const refresh = localStorage.getItem('refresh')!;
     this.authService.logout(refresh).subscribe(() => {

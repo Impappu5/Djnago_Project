@@ -1,6 +1,6 @@
 <h2>User Profile</h2>
-
-<p><b>Username:</b> {{ user?.username }}</p>
-<p><b>Email:</b> {{ user?.email }}</p>
-
+<h2 *ngIf="user$ | async as user">
+  <p><b>Username:</b> {{ user.username }}</p>
+  <p><b>Email:</b> {{ user.email }}</p>
+</h2>
 <button (click)="logout()">Logout</button>

@@ -10,16 +10,28 @@ export class AuthService {
   constructor(private http: HttpClient) {
 
   }
- 
+
   private apiUrl = 'http://127.0.0.1:8000/api/';
 
- 
-register(data: any) {
-    return this.http.post(this.apiUrl + 'register/', data);
+
+  register(data: any) {
+    // return this.http.post(this.apiUrl + 'register/', data);
+    return this.http.post(`${this.apiUrl}register/`, data);
+
   }
 
-  login(data: any):Observable<any> {
-    return this.http.post(this.apiUrl + 'login/', data);
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}login/`, data);
+  }
+  getProfile(): Observable<any> {
+    console.log('test');
+    const token = localStorage.getItem('access');
+
+    return this.http.get('http://127.0.0.1:8000/api/profile/', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 
   profile() {
@@ -40,7 +52,7 @@ register(data: any) {
   }
 
   clearTokens() {
-  localStorage.clear();
+    localStorage.clear();
 
   }
 }
