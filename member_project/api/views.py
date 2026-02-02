@@ -20,8 +20,12 @@ from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
+from rest_framework.permissions import AllowAny
+
+
 ###########Signup API #########
 class RegisterUser(APIView):
+    permission_classes = [AllowAny]
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -34,6 +38,7 @@ class RegisterUser(APIView):
 
 
 class LoginAPI(APIView):
+    permission_classes = [AllowAny]
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
@@ -61,11 +66,15 @@ class UserProfile(APIView):
 
     def get(self, request):
         user = request.user
-        return Response({"id": user.id, "username": user.username, "email": user.email})
+        return Response({
+        "id": user.id, 
+        "username": user.username,
+        "email": user.email})
 
 
 class LogoutAPI(APIView):
     permission_classes = [IsAuthenticated]
+    
 
     def post(self, request):
         try:
